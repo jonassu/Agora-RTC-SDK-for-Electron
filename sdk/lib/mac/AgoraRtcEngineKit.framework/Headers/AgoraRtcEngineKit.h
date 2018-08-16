@@ -936,6 +936,22 @@ description:(NSString * _Nullable)description;
  */
 - (int)setDefaultMuteAllRemoteAudioStreams:(BOOL)mute;
 
+#if (!(TARGET_OS_IPHONE) && (TARGET_OS_MAC))
+
+/** Starts loopback recording.
+
+NOTE: This method applies to macOS only.
+
+@param enabled    * YES: Enable recording
+* NO: Disable recording
+
+@param deviceName Device name of the recorder.
+@return * 0: Success. * <0: Failure.
+*/
+-(int)enableLoopbackRecording:(BOOL)enabled
+                  deviceName : (NSString * _Nullable)deviceName;
+#endif
+
 #if TARGET_OS_IPHONE
 /**
  *  Enable / Disable speaker of device

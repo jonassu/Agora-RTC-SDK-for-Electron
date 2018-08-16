@@ -90,6 +90,10 @@ describe('Basic API Coverage 2', () => {
     const filepath = path.join(__dirname, './videosource.log');
     expect(localRtcEngine.videoSourceSetLogFile(filepath) <= 0).toBeTruthy();
   });
+
+  it('enable loopback recording', () => {
+    expect(localRtcEngine.enableLoopbackRecording(false) <= 0).toBeTruthy();
+  });
 });
 
 describe('Render coverage', () => {

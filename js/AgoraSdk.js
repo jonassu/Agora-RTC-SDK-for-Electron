@@ -965,6 +965,16 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcengine.setLocalVideoMirrorMode(mirrortype);
   }
 
+  /**
+   * @description This method enables loopback recording. Once enabled, the SDK collects all local sounds.
+   * @param {*} enable enable or not
+   * @param {*} deviceName name of device
+   * @returns {int} 0 for success, <0 for failure
+   */
+  enableLoopbackRecording(enable, deviceName = null) {
+    return this.rtcengine.enableLoopbackRecording(enable, deviceName);
+  }
+
   // ===========================================================================
   // DEVICE MANAGEMENT
   // ===========================================================================

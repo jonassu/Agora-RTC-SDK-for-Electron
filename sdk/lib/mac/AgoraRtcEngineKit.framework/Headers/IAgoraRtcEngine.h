@@ -1103,9 +1103,6 @@ public:
         (void)status;
     }
 
-    virtual void onAudioRoutingChanged(int routing) {
-        (void)routing;
-    }
 };
 
 /**
@@ -2411,9 +2408,11 @@ public:
         return setParameters("{\"rtc.video.prefer_frame_rate\":%s,\"che.video.prefer_frame_rate\":%s}", preferFrameRateOverImageQuality ? "true" : "false", preferFrameRateOverImageQuality ? "true" : "false");
     }
 
-	int enableLoopbackRecording(bool enabled) {
-		return setParameters("{\"che.audio.loopback.recording\":%s}", enabled ? "true" : "false");
-	}
+	int enableLoopbackRecording(bool enabled, const char *deviceName = NULL) {
+        m_parameter->setString("che.audio.loopback.deviceName", deviceName);
+        setParameters("{\"che.audio.loopback.recording\":%s}", enabled ? "true" : "false");
+        return 0;
+    }
 
 protected:
     AParameter& parameter() {

@@ -806,9 +806,16 @@ namespace agora {
                 bool enable;
                 status = napi_get_value_bool_(args[0], enable);
                 CHECK_NAPI_STATUS(pEngine, status);
+
                 RtcEngineParameters param(pEngine->m_engine);
-                //result = param.enableLoopbackRecording(enable);
-				result = node_generic_error;
+                if(args.Length() > 1 && !args[1]->IsNull()) {
+                    NodeString deviceName;
+                    status = napi_get_value_nodestring_(args[1], deviceName);
+                    CHECK_NAPI_STATUS(pEngine, status);
+                    result = param.enableLoopbackRecording(enable, (char*)deviceName);
+                } else {
+                    result = param.enableLoopbackRecording(enable);
+                }
             } while (false);
             napi_set_int_result(args, result);
             LOG_LEAVE;
